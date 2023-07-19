@@ -54,5 +54,35 @@ app.put("/api/accaunts/:id", (req, res) => {
   res.json(updatedaccaunt);
 });
 
+app.patch("/api/accaunts/:id", (req, res) => {
+  const accauntId = req.params.id;
+  const updatedData = req.body;
+
+  const updatedaccaunt = {
+    id: accauntId,
+    ...updatedData,
+  };
+
+  res.json(updatedaccaunt);
+});
+
+app.delete("/api/accaunts/:id", (req, res) => {
+  const accauntId = Number(req.params.id);
+
+  // Find the index of the accaunt with the provided ID
+  const accauntIndex = accaunts.findIndex(
+    (accaunt) => accaunt.id === accauntId
+  );
+
+  // Check if the accaunt exists
+  if (accauntIndex !== -1) {
+    // Remove the accaunt from the accaunts array
+    const deletedaccaunt = accaunts.splice(accauntIndex, 1);
+    res.json(deletedaccaunt);
+  } else {
+    res.status(404).json({ error: "accaunt not found" });
+  }
+});
+
 const port = process.env.PORT || 3500;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
