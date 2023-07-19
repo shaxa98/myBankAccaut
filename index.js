@@ -10,9 +10,7 @@ const accaunts = [
   { id: 4, name: "Daler", money: 450 },
   { id: 5, name: "Bobur", money: 550 },
 ];
-app.get("/api/shaxzod", (req, res) => {
-  res.send("Hello I am Shaxzod api");
-});
+
 app.get("/api/accaunts", (req, res) => {
   res.send(accaunts);
 });
@@ -39,7 +37,7 @@ app.post("/api/accaunts", (req, res) => {
     money: req.body.money,
   };
   accaunts.push(accaunt);
-  res.send(accaunt);
+  res.send(accaunts);
 });
 
 app.put("/api/accaunts/:id", (req, res) => {
@@ -50,20 +48,16 @@ app.put("/api/accaunts/:id", (req, res) => {
     id: accauntId,
     ...updatedData,
   };
-
+  accaunts.push(updatedaccaunt);
   res.json(updatedaccaunt);
 });
 
-app.patch("/api/accaunts/:id", (req, res) => {
-  const accauntId = req.params.id;
-  const updatedData = req.body;
-
-  const updatedaccaunt = {
-    id: accauntId,
-    ...updatedData,
-  };
-
-  res.json(updatedaccaunt);
+app.patch("/api/accaunts/:id/balance", (req, res) => {
+  const accauntId = parseInt(req.params.id);
+  const findaccaunt = accaunts.find((c) => c.id === accauntId);
+  findaccaunt.money = req.body.money;
+  console.log(findaccaunt);
+  res.json(findaccaunt);
 });
 
 app.delete("/api/accaunts/:id", (req, res) => {
