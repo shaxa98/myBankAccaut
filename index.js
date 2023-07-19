@@ -33,12 +33,14 @@ app.post("/api/accaunts", (req, res) => {
     name: req.body.name,
     balance: req.body.balance,
   };
+  fs.writeFileSync("./users.json", JSON.stringify(users));
   users.push(accaunt);
   res.send(users);
 });
 
 app.put("/api/accaunts/:id", (req, res) => {
   const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+
   const accauntId = req.params.id;
   const updatedData = req.body;
 
