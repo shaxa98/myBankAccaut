@@ -1,14 +1,17 @@
 const express = require("express");
 const app = express();
+const fs = require("fs");
 
 app.use(express.json());
+const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+console.log(users);
 
 const accaunts = [
-  { id: 1, name: "Shaxzod", money: 150 },
-  { id: 2, name: "Begzod", money: 200 },
-  { id: 3, name: "Jonibek", money: 350 },
-  { id: 4, name: "Daler", money: 450 },
-  { id: 5, name: "Bobur", money: 550 },
+  { id: 1, name: "Shaxzod", balance: 150 },
+  { id: 2, name: "Begzod", balance: 200 },
+  { id: 3, name: "Jonibek", balance: 350 },
+  { id: 4, name: "Daler", balance: 450 },
+  { id: 5, name: "Bobur", balance: 550 },
 ];
 
 app.get("/api/accaunts", (req, res) => {
@@ -34,7 +37,7 @@ app.post("/api/accaunts", (req, res) => {
   let accaunt = {
     id: accaunts.length + 1,
     name: req.body.name,
-    money: req.body.money,
+    balance: req.body.balance,
   };
   accaunts.push(accaunt);
   res.send(accaunts);
@@ -55,7 +58,7 @@ app.put("/api/accaunts/:id", (req, res) => {
 app.patch("/api/accaunts/:id/balance", (req, res) => {
   const accauntId = parseInt(req.params.id);
   const findaccaunt = accaunts.find((c) => c.id === accauntId);
-  findaccaunt.money = req.body.money;
+  findaccaunt.balance = req.body.balance;
   console.log(findaccaunt);
   res.json(findaccaunt);
 });
