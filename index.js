@@ -4,6 +4,21 @@ const app = express();
 
 app.use(express.json());
 
+app.use("/", (req, res, next) => {
+  const password = req.headers.password;
+  const username = req.headers.username;
+  const users = JSON.parse(fs.readFileSync("./pw.json", "utf8"));
+
+  const user = users.find((c) => c.name === username);
+  if (user?.password == password) {
+    next();
+  } else {
+    res.status(401);
+    res.send("Access forbidden");
+  }
+});
+app.use("/static", express.static("public"));
+
 app.get("/api/accounts", (req, res) => {
   const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   res.send(users);

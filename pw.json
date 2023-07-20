@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Shaxzod",
+    "password": 12345678
+  },
+  {
+    "id": 2,
+    "name": "Begzod",
+    "password": 12345679
+  },
+  {
+    "id": 3,
+    "name": "Jonibek",
+    "password": 123456710
+  },
+  {
+    "id": 4,
+    "name": "Aziz",
+    "password": 123456711
+  },
+  {
+    "id": 5,
+    "name": "Temur",
+    "password": 123456712
+  },
+  {
+    "id": 6,
+    "name": "Bobur",
+    "password": 123456713
+  },
+  {
+    "id": 7,
+    "name": "Baxti",
+    "password": 123456714
+  },
+  {
+    "id": 8,
+    "name": "Tolib",
+    "password": 123456715
+  },
+  {
+    "id": 9,
+    "name": "Shaxram",
+    "password": 123456716
+  },
+  {
+    "id": 10,
+    "name": "Bobo",
+    "password": 123456717
+  }
+]
