@@ -1,26 +1,25 @@
 const express = require("express");
-const app = express();
 const fs = require("fs");
+const app = express();
 
 app.use(express.json());
-const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
 
-app.get("/api/accaunts", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.get("/api/accounts", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   res.send(users);
 });
-app.get("/api/accaunts/:id", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.get("/api/accounts/:id", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   const accaunt = users.find((c) => c.id === parseInt(req.params.id));
   if (!accaunt)
     res.status(404).send("The account with the given ID was not found");
   res.send(accaunt);
 });
-app.get("/api/accaunts/:id", (req, res) => {
+app.get("/api/accounts/:id", (req, res) => {
   res.send(req.params.id);
 });
-app.post("/api/accaunts", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.post("/api/accounts", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   if (!req.body || req.body.name.length < 3) {
     res
       .status(400)
@@ -33,13 +32,13 @@ app.post("/api/accaunts", (req, res) => {
     name: req.body.name,
     balance: req.body.balance,
   };
-  fs.writeFileSync("./users.json", JSON.stringify(users));
   users.push(accaunt);
+  fs.writeFileSync("./users.json", JSON.stringify(users));
   res.send(users);
 });
 
-app.put("/api/accaunts/:id", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.put("/api/accounts/:id", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
 
   const accauntId = req.params.id;
   const updatedData = req.body;
@@ -52,26 +51,29 @@ app.put("/api/accaunts/:id", (req, res) => {
   res.json(updatedaccaunt);
 });
 
-app.patch("/api/accaunts/:id/balance", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.patch("/api/accounts/:id/balance", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   const accauntId = parseInt(req.params.id);
   const findaccaunt = users.find((c) => c.id === accauntId);
   findaccaunt.balance = req.body.balance;
+  fs.writeFileSync("./users.json", JSON.stringify(users));
   console.log(findaccaunt);
   res.json(findaccaunt);
 });
 
-app.delete("/api/accaunts/:id", (req, res) => {
-  const users = JSON.parse(fs.readFileSync("./user.json", "utf8"));
+app.delete("/api/accounts/:id", (req, res) => {
+  const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   const accauntId = Number(req.params.id);
   const accauntIndex = users.findIndex((accaunt) => accaunt.id === accauntId);
 
   if (accauntIndex !== -1) {
-    const deletedaccaunt = accaunts.splice(accauntIndex, 1);
-    res.json(deletedaccaunt);
+    const deletedusers = users.splice(accauntIndex, 1);
+    fs.writeFileSync("./users.json", JSON.stringify(users));
+    res.send(deletedusers);
   } else {
     res.status(404).json({ error: "accaunt not found" });
   }
+  j;
 });
 
 const port = process.env.PORT || 3500;
