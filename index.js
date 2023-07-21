@@ -19,6 +19,15 @@ app.use("/", (req, res, next) => {
 });
 app.use("/static", express.static("public"));
 
+app.patch("/changePasword", (req, res) => {
+  const newPw = req.body.password;
+  const users = JSON.parse(fs.readFileSync("./pw.json", "utf8"));
+  const user = users.find((c) => c.name == req.headers.username);
+  user.password = newPw;
+  fs.writeFileSync("./pw.json", JSON.stringify(users));
+  res.json(`${req.headers.username} user password changed to ${newPw}`);
+});
+
 app.get("/api/accounts", (req, res) => {
   const users = JSON.parse(fs.readFileSync("./users.json", "utf8"));
   res.send(users);
