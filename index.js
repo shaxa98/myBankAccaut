@@ -20,7 +20,7 @@ app.use("/", (req, res, next) => {
     res.send("Access forbidden");
   }
 });
-app.use("/static", express.static("public"));
+app.use(express.static("public"));
 
 app.patch("/changePasword", (req, res) => {
   const newPw = req.body.password;
@@ -33,9 +33,9 @@ app.patch("/changePasword", (req, res) => {
 
 app.use("/api/accounts", require("./users/accaunts.js"));
 
-const port = process.env.PORT || 3500;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
-
 app.get("/first_template", function (req, res) {
   res.render("first_view");
 });
+
+const port = process.env.PORT || 3500;
+app.listen(port, () => console.log(`Listening on port ${port}...`));
