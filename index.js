@@ -1,7 +1,13 @@
 const express = require("express");
 const fs = require("fs");
-const app = express();
+
 const router = express.Router();
+
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const upload = multer();
+const app = express();
+
 app.set("view engine", "pug");
 app.set("views", "./views");
 
@@ -23,6 +29,28 @@ app.use("/", (req, res, next) => {
 app.use(express.static("public"));
 app.use(express.static("images"));
 app.use("/static", express.static("public"));
+// Form data
+app.get("/", function (req, res) {
+  res.render("form");
+});
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+// for parsing application/json
+app.use(bodyParser.json());
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true }));
+//form-urlencoded
+
+// for parsing multipart/form-data
+app.use(upload.array());
+app.use(express.static("public"));
+
+app.post("/", function (req, res) {
+  console.log(req.body);
+  res.send("recieved your request!");
+});
 
 app.patch("/changePasword", (req, res) => {
   const newPw = req.body.password;
