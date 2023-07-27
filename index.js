@@ -21,6 +21,8 @@ app.use("/", (req, res, next) => {
   }
 });
 app.use(express.static("public"));
+app.use(express.static("images"));
+app.use("/static", express.static("public"));
 
 app.patch("/changePasword", (req, res) => {
   const newPw = req.body.password;
