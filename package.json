@@ -1,30 +1,19 @@
 {
-  "name": "a",
+  "name": "first",
   "version": "1.0.0",
-  "description": "npm i --save-dev nodemon npm install express --save",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shaxa98/myBankAccaut.git"
-  },
-  "author": "",
+  "author": "Bekhzod Akhrorov",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/shaxa98/myBankAccaut/issues"
-  },
-  "homepage": "https://github.com/shaxa98/myBankAccaut#readme",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "fs": "^0.0.1-security",
+    "handlebars": "^4.7.7",
+    "mongoose": "^7.4.1",
     "multer": "^1.4.5-lts.1",
-    "pug": "^3.0.2"
-  },
-  "devDependencies": {
     "nodemon": "^3.0.1"
-  },
-  "keywords": []
+  }
 }

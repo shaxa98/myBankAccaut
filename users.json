@@ -1,1 +1,6 @@
-[{"id":1,"name":"Shaxzod","balance":150},{"id":2,"name":"Begzod","balance":200},{"id":3,"name":"Jonibek","balance":350},{"id":4,"name":"Daler","balance":450},{"id":5,"name":"Bobur","balance":5500},{"id":6,"name":"Jasur","balance":250},{"id":7,"name":"Amir","balance":600},{"id":8,"name":"Javlon","balance":350},{"id":9,"name":"Damir","balance":750},{"id":10,"name":"Baxodur","balance":750},{"id":11,"name":"Javlon","balance":350},{"id":12,"name":"Javlon","balance":550},{"id":13,"name":"Javlon","balance":550},{"id":14,"name":"Rasul","balance":550}]
+[
+  { "id": 1, "name": "Bekhzod", "balance": 100, "currency": "USD" },
+  { "id": 2, "name": "Shakhzod", "balance": 1000, "currency": "USD" },
+  { "id": 3, "name": "Damir", "balance": 1, "currency": "USD" },
+  { "name": "NewUser", "balance": "100", "currency": "UZS", "id": "3" }
+]
