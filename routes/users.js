@@ -78,9 +78,6 @@ router.get("/", getUsers);
 
 ///
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
-
 //routes
 
 router.get("/", (req, res) => {
@@ -88,31 +85,31 @@ router.get("/", (req, res) => {
 });
 
 router.get("/blog", (req, res) => {
-  res.send("Hello Blog, My name is Devtamin");
+  res.send("Hello Blog, My name is Shaxzod");
 });
 
-router.get("/Users", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const Users = await User.find({});
+    const users = await User.find({});
     res.status(200).json(Users);
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/Users/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const User = await User.findById(id);
+    const users = await User.findById(id);
     res.status(200).json(User);
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/Users", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
-    const User = await User.create(req.body);
+    const users = await User.create(req.body);
     res.status(200).json(User);
   } catch (error) {
     next(error);
@@ -120,10 +117,10 @@ router.post("/Users", async (req, res) => {
 });
 
 // update a User
-router.put("/Users/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const User = await User.findByIdAndUpdate(id, req.body);
+    const users = await User.findByIdAndUpdate(id, req.body);
     // we cannot find any User in database
     if (!User) {
       return res
@@ -139,10 +136,10 @@ router.put("/Users/:id", async (req, res) => {
 
 // delete a User
 
-router.delete("/Users/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const User = await User.findByIdAndDelete(id);
+    const users = await User.findByIdAndDelete(id);
     if (!User) {
       return res
         .status(404)
