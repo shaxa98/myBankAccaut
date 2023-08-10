@@ -4,6 +4,7 @@ const accountRoute = require("./routes/accounts");
 const authMiddleware = require("./middleware/authentication");
 const rootRoute = require("./routes/root");
 const imageRoute = require("./routes/image");
+const authRoute = require("./routes/auth");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -36,11 +37,12 @@ app.use("/user", userRoute);
 app.use("/account", accountRoute);
 app.use("/image", imageRoute);
 app.use("/", rootRoute);
+app.use("/auth", authRoute);
 
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500);
-  res.send("Oops, something went wrong.");
+  res.send(err.message);
 });
 
 app.listen(3000, () => {
