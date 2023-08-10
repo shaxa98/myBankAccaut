@@ -80,7 +80,7 @@ router.get("/", getUsers);
 
 //routes
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.send("Hello NODE API");
 });
 
@@ -97,7 +97,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const users = await User.findById(id);
@@ -117,7 +117,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // update a User
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const users = await User.findByIdAndUpdate(id, req.body);
@@ -136,7 +136,7 @@ router.put("/:id", async (req, res) => {
 
 // delete a User
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const users = await User.findByIdAndDelete(id);
