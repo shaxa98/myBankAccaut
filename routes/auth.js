@@ -57,17 +57,17 @@ router.post("/register", async (req, res) => {
 //change password
 
 router.patch("/password", async (req, res) => {
-  const { email, currentPassword, newPassword } = req.body;
+  const { name, email, OldPassword, newPassword } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ name, email });
 
     if (!user) {
       res
         .status(404)
         .json({ error: "User not found. Please check your email." });
     } else {
-      if (user.password !== currentPassword) {
+      if (user.password !== OldPassword) {
         res.status(401).json({ error: "Incorrect current password." });
       } else {
         user.password = newPassword;
@@ -82,6 +82,7 @@ router.patch("/password", async (req, res) => {
 // baroyi kor farmidan postmana bodyashba menavestagi kod
 //
 // {
+// "name": "shaxzod"
 //   "email": "user@example.com",
 //   "currentPassword": "oldPassword",
 //   "newPassword": "newPassword"
