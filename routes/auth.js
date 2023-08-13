@@ -29,7 +29,7 @@ router.post("/login", async (req, res, next) => {
 //register
 
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name, surname } = req.body; // Extract name and surname
 
   try {
     const existingUser = await User.findOne({ email });
@@ -37,7 +37,7 @@ router.post("/register", async (req, res) => {
     if (existingUser) {
       res.status(409).json({ error: "User with this email already exists." });
     } else {
-      const newUser = new User({ email, password });
+      const newUser = new User({ email, password, name, surname }); // Include name and surname
       await newUser.save();
       res.json({ message: "Registration successful!" });
     }
@@ -46,6 +46,13 @@ router.post("/register", async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+// baroyi kor farmidan postmana bodyashba menavestagi kod
+// {
+//   "email": "user@example.com",
+//   "password": "secretpassword",
+//   "name": "John",
+//   "surname": "Doe"
+// }
 
 //change password
 
@@ -72,4 +79,11 @@ router.patch("/password", async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+// baroyi kor farmidan postmana bodyashba menavestagi kod
+//
+// {
+//   "email": "user@example.com",
+//   "currentPassword": "oldPassword",
+//   "newPassword": "newPassword"
+// }
 module.exports = router;
